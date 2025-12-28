@@ -1,6 +1,7 @@
 ﻿using NavalDLC.CharacterDevelopment;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace Bannerlord.ShipmasterReworked.Systems
 {
@@ -36,10 +37,39 @@ namespace Bannerlord.ShipmasterReworked.Systems
             int roundedXp = MBRandom.RoundRandomized(finalXp);
 
             hero.AddSkillXp(NavalSkills.Shipmaster, roundedXp);
+
+            // Display Debug Message if debug mode is enabled (Todo later)
+            //if(hero.IsHumanPlayerCharacter)
+            //{
+            //    InformationManager.DisplayMessage(
+            //        new InformationMessage(
+            //            $"[Shipmaster Reworked] Gained {roundedXp} Shipmaster XP for traveling."));
+            //}
         }
 
+        public static void OnRamming(Hero hero, float damagePercent, int ramQuality)
+        {
+            if (hero == null || damagePercent <= 0f)
+                return;
+
+            const float baseXp = 30f;
+            const float qualityFactor = 0.25f;
+
+            float rawXp = baseXp * damagePercent * (1f + ramQuality * qualityFactor);
+            if (rawXp <= 0f)
+                return;
+
+            int xp = MBRandom.RoundRandomized(rawXp);
+            hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+
+            // Display Debug Message if debug mode is enabled (Todo later)
+            //InformationManager.DisplayMessage(
+            //    new InformationMessage(
+            //        $"[Shipmaster Reworked] {hero.Name} gained {xp} Shipmaster XP for ramming."));
+        }
+
+
         // Future:
-        // public static void OnRamming(Hero hero, float damage) { }
         // public static void OnNavalBattle(Hero hero, int enemyShips) { }
     }
 }
