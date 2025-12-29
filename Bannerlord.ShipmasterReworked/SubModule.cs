@@ -18,7 +18,7 @@ namespace Bannerlord.ShipmasterReworked
 
             var harmony = new Harmony(ModuleInfo.Id);
             harmony.PatchAll();
-            InformationManager.DisplayMessage(new InformationMessage($"[{ModuleInfo.DisplayName}] Harmony patches applied."));
+            InformationManager.DisplayMessage(new InformationMessage($"[{ModuleInfo.DisplayName}] Harmony patches applied.", Colors.Green));
         }
 
         protected override void OnSubModuleUnloaded()
