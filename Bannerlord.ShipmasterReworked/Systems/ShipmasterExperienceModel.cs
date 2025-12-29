@@ -1,4 +1,5 @@
-﻿using NavalDLC.CharacterDevelopment;
+﻿using Bannerlord.ShipmasterReworked.Settings;
+using NavalDLC.CharacterDevelopment;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -7,11 +8,11 @@ namespace Bannerlord.ShipmasterReworked.Systems
 {
     public static class ShipmasterExperienceModel
     {
-        private const float BaseTravelXpMultiplier = 1.4f;
-        private const int BaseMaxShips = 3;
-
         public static void OnTravel(Hero hero, float speed)
         {
+            float travelXpMultiplier = ConfigCache.TravelXpMultiplier;
+            const int baseMaxShips = 3;
+
             var mobileParty = hero.PartyBelongedTo;
             if (mobileParty == null)
                 return;
@@ -20,7 +21,7 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (numOfShips <= 0)
                 return;
 
-            int maxNumOfShips = BaseMaxShips;
+            int maxNumOfShips = baseMaxShips;
 
             if (mobileParty.HasPerk(NavalPerks.Shipmaster.ShoreMaster, checkSecondaryRole: true))
                 maxNumOfShips += 1;
@@ -28,32 +29,40 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (mobileParty.HasPerk(NavalPerks.Shipmaster.FleetCommander))
                 maxNumOfShips += 1;
 
-            int multiplier = 1;
             if (numOfShips == maxNumOfShips)
-                multiplier = 3;
+                travelXpMultiplier = 3;
 
-            float baseXp = BaseTravelXpMultiplier * speed;
-            float finalXp = baseXp * multiplier;
+            float baseXp = 1.4f * speed;
+            float finalXp = baseXp * travelXpMultiplier;
             int roundedXp = MBRandom.RoundRandomized(finalXp);
 
             hero.AddSkillXp(NavalSkills.Shipmaster, roundedXp);
 
-            // Display Debug Message if debug mode is enabled (Todo later)
-            //if(hero.IsHumanPlayerCharacter)
-            //{
-            //    InformationManager.DisplayMessage(
-            //        new InformationMessage(
-            //            $"[Shipmaster Reworked] Gained {roundedXp} Shipmaster XP for traveling."));
-            //}
+            if (ConfigCache.TravelXpDebug && hero.IsHumanPlayerCharacter)
+            {
+                InformationManager.DisplayMessage(
+                    new InformationMessage(
+                        $"[Shipmaster Reworked] Granted {roundedXp} Shipmaster XP for travel with {numOfShips} ships (max {maxNumOfShips}) at speed {speed:F2}. Base XP: {baseXp:F2}, Multiplier: {travelXpMultiplier}, Final XP before rounding: {finalXp:F2}."));
+            }
         }
 
         public static void OnRamming(Hero hero, float damagePercent, int ramQuality)
         {
-            if (hero == null || damagePercent <= 0f)
+            if (hero == null)
                 return;
 
-            const float baseXp = 30f;
-            const float qualityFactor = 0.25f;
+            if (float.IsNaN(damagePercent) || float.IsInfinity(damagePercent))
+                return;
+
+            // Clamp to sane range: 0% – 100%
+            damagePercent = MathF.Clamp(damagePercent, 0f, 1.5f);
+
+            if (damagePercent <= 0f)
+                return;
+
+
+            int baseXp = ConfigCache.RammingXpBase;
+            float qualityFactor = ConfigCache.RammingXpQualityFactor;
 
             float rawXp = baseXp * damagePercent * (1f + ramQuality * qualityFactor);
             if (rawXp <= 0f)
@@ -62,14 +71,12 @@ namespace Bannerlord.ShipmasterReworked.Systems
             int xp = MBRandom.RoundRandomized(rawXp);
             hero.AddSkillXp(NavalSkills.Shipmaster, xp);
 
-            // Display Debug Message if debug mode is enabled (Todo later)
-            //InformationManager.DisplayMessage(
-            //    new InformationMessage(
-            //        $"[Shipmaster Reworked] {hero.Name} gained {xp} Shipmaster XP for ramming."));
+            if (ConfigCache.RammingXpDebug && hero.IsHumanPlayerCharacter)
+            {
+                InformationManager.DisplayMessage(
+                    new InformationMessage(
+                        $"[Shipmaster Reworked] Granted {xp} Shipmaster XP for ramming with damage percent {damagePercent:P2} and ram quality {ramQuality}. Base XP: {baseXp}, Quality Factor: {qualityFactor}, Raw XP before rounding: {rawXp:F2}."));
+            }
         }
-
-
-        // Future:
-        // public static void OnNavalBattle(Hero hero, int enemyShips) { }
     }
 }
