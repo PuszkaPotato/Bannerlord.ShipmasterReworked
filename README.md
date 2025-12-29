@@ -1,4 +1,4 @@
-# Bannerlord.ShipmasterReworked
+# Bannerlord Shipmaster Reworked
 
 A mod for Mount & Blade II: Bannerlord for the DLC War Sails that changes the behaviour of experience gain for Shipmaster skill.
 
