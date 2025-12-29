@@ -9,8 +9,8 @@ namespace Bannerlord.ShipmasterReworked.Settings
         private float _travelXpMultiplier = 3.0f;
         private bool _travelXpDebug = false;
 
-        private int _rammingXpBase = 30;    
-        private float _rammingXpQualityFactor = 0.25f;
+        private int _rammingXpBase = 80;    
+        private float _rammingXpQualityFactor = 0.15f;
         private bool _rammingXpDebug = false;
         
         public override string Id => ModuleInfo.Id;
