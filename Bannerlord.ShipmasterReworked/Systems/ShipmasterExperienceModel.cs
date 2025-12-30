@@ -10,7 +10,14 @@ namespace Bannerlord.ShipmasterReworked.Systems
     {
         public static void OnTravel(Hero hero, float speed)
         {
+            if (hero == null)
+                return;
+
+            if (float.IsNaN(speed) || float.IsInfinity(speed) || speed <= 0f)
+                return;
+
             float travelXpMultiplier = ConfigCache.TravelXpMultiplier;
+            float multiplier = 1f;
             const int baseMaxShips = 3;
 
             var mobileParty = hero.PartyBelongedTo;
@@ -30,10 +37,10 @@ namespace Bannerlord.ShipmasterReworked.Systems
                 maxNumOfShips += 1;
 
             if (numOfShips == maxNumOfShips)
-                travelXpMultiplier = 3;
+                multiplier *= travelXpMultiplier;
 
             float baseXp = 1.4f * speed;
-            float finalXp = baseXp * travelXpMultiplier;
+            float finalXp = baseXp * multiplier;
             int roundedXp = MBRandom.RoundRandomized(finalXp);
 
             hero.AddSkillXp(NavalSkills.Shipmaster, roundedXp);
@@ -42,7 +49,7 @@ namespace Bannerlord.ShipmasterReworked.Systems
             {
                 InformationManager.DisplayMessage(
                     new InformationMessage(
-                        $"[Shipmaster Reworked] Granted {roundedXp} Shipmaster XP for travel with {numOfShips} ships (max {maxNumOfShips}) at speed {speed:F2}. Base XP: {baseXp:F2}, Multiplier: {travelXpMultiplier}, Final XP before rounding: {finalXp:F2}."));
+                        $"[Shipmaster Reworked] Granted {roundedXp} Shipmaster XP for travel with {numOfShips} ships (max {maxNumOfShips}) at speed {speed:F2}. Base XP: {baseXp:F2}, Multiplier: {multiplier}, Final XP before rounding: {finalXp:F2}."));
             }
         }
 
@@ -54,7 +61,7 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (float.IsNaN(damagePercent) || float.IsInfinity(damagePercent))
                 return;
 
-            // Clamp to sane range: 0% – 100%
+            // Clamp to sane range: 0% – 150%
             damagePercent = MathF.Clamp(damagePercent, 0f, 1.5f);
 
             if (damagePercent <= 0f)
