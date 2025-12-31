@@ -31,4 +31,5 @@ namespace Bannerlord.ShipmasterReworked.Systems.Environment
 
             return false;
         }
+    }
 }
