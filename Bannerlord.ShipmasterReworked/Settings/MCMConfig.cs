@@ -17,7 +17,7 @@ namespace Bannerlord.ShipmasterReworked.Settings
         private bool _rammingXpDebug = false;
         
         public override string Id => ModuleInfo.Id;
-        public override string DisplayName => ModuleInfo.DisplayName;
+        public override string DisplayName => ModuleInfo.DisplayName + " " + ModuleInfo.Version;
         public override string FolderName => ModuleInfo.FolderName;
         public override string FormatType => ModuleInfo.FormatType;
 

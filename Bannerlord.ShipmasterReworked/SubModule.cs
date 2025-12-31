@@ -1,6 +1,7 @@
-﻿using TaleWorlds.MountAndBlade;
-using HarmonyLib;
+﻿using HarmonyLib;
+using System.Reflection;
 using TaleWorlds.Library;
+using TaleWorlds.MountAndBlade;
 
 
 namespace Bannerlord.ShipmasterReworked
@@ -9,6 +10,7 @@ namespace Bannerlord.ShipmasterReworked
     {
         public string moduleId => ModuleInfo.Id;
         public string moduleDisplayName => ModuleInfo.DisplayName;
+        public string moduleVersion => ModuleInfo.Version;
         public string settingsFolderName => ModuleInfo.FolderName;
         public string settingsFormatType => ModuleInfo.FormatType;
 
@@ -38,5 +40,11 @@ namespace Bannerlord.ShipmasterReworked
         public const string DisplayName = "Shipmaster Reworked";
         public const string FolderName = "ShipmasterReworked";
         public const string FormatType = "json";
+
+        public static string Version =>
+            Assembly.GetExecutingAssembly()
+                    .GetName()
+                    .Version?
+                    .ToString() ?? "Unknown";
     }
 }
