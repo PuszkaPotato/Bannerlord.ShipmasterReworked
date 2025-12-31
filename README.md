@@ -5,6 +5,7 @@ A mod for Mount & Blade II: Bannerlord for the DLC War Sails that changes the be
 ## Features
 
 - Experience gain for Shipmaster skill from sailing now has a 3x multiplier if the number of ships in the party equals the maximum amount of ships the player party can have, by default it's 3 ships, with perks it can raise to 5.
+- Experience gain for Shipmaster skill from sailing now has additional 2x multiplier for travelling in storms.
 - Experience gain for Shipmaster skill from ramming in naval battles, it depends on the ramming quality as well as the ramming damage.
 
 ## Requirements
