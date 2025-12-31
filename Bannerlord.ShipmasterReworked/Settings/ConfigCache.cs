@@ -7,6 +7,8 @@
         public static int RammingXpBase { get; private set; }
         public static float RammingXpQualityFactor { get; private set; }
         public static bool RammingXpDebug { get; private set; }
+        public static bool EnableStormTravelXp { get; private set; }
+        public static float StormTravelXpMultiplier { get; private set; }
 
         public static void Refresh(MCMConfig settings)
         {
@@ -16,6 +18,9 @@
             RammingXpBase = settings.RammingXpBase;
             RammingXpQualityFactor = settings.RammingXpQualityFactor;
             RammingXpDebug = settings.RammingXpDebug;
+
+            EnableStormTravelXp = settings.EnableStormTravelXp;
+            StormTravelXpMultiplier = settings.StormTravelXpMultiplier;
         }
     }
 }
