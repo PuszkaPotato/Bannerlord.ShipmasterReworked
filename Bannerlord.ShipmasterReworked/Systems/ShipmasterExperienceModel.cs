@@ -1,4 +1,5 @@
 ﻿using Bannerlord.ShipmasterReworked.Settings;
+using Bannerlord.ShipmasterReworked.Systems.Environment;
 using NavalDLC.CharacterDevelopment;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
@@ -39,6 +40,11 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (numOfShips == maxNumOfShips)
                 multiplier *= travelXpMultiplier;
 
+            if (NavalEnvironmentHelper.IsPartyInStorm() && ConfigCache.EnableStormTravelXp)
+            {
+                   multiplier *= ConfigCache.StormTravelXpMultiplier;
+            }
+
             float baseXp = 1.4f * speed;
             float finalXp = baseXp * multiplier;
             int roundedXp = MBRandom.RoundRandomized(finalXp);
@@ -47,9 +53,18 @@ namespace Bannerlord.ShipmasterReworked.Systems
 
             if (ConfigCache.TravelXpDebug && hero.IsHumanPlayerCharacter)
             {
-                InformationManager.DisplayMessage(
-                    new InformationMessage(
-                        $"[Shipmaster Reworked] Granted {roundedXp} Shipmaster XP for travel with {numOfShips} ships (max {maxNumOfShips}) at speed {speed:F2}. Base XP: {baseXp:F2}, Multiplier: {multiplier}, Final XP before rounding: {finalXp:F2}."));
+                if(NavalEnvironmentHelper.IsPartyInStorm())
+                {
+                    InformationManager.DisplayMessage(
+                        new InformationMessage(
+                            $"[Shipmaster Reworked] Granted {roundedXp} Shipmaster XP for travel at speed {speed:F2} in storm conditions with additional multiplier of {ConfigCache.StormTravelXpMultiplier}. Base XP: {baseXp:F2}, Multiplier: {multiplier:F2}, Final XP before rounding: {finalXp:F2}."));
+                }
+                else
+                {
+                    InformationManager.DisplayMessage(
+                        new InformationMessage(
+                            $"[Shipmaster Reworked] Granted {roundedXp} Shipmaster XP for travel at speed {speed:F2}. Base XP: {baseXp:F2}, Multiplier: {multiplier:F2}, Final XP before rounding: {finalXp:F2}."));
+                }
             }
         }
 
