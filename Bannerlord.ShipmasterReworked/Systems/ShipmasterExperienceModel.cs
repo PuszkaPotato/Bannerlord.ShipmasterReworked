@@ -86,6 +86,56 @@ namespace Bannerlord.ShipmasterReworked.Systems
             }
         }
 
+        public static void OnBallistaHit(
+            Hero hero,
+            float distanceMeters,
+            int damage)
+        {
+            if (!IsValidHero(hero))
+                return;
+
+            if (!IsValidPositiveFloat(distanceMeters))
+                return;
+
+            if (damage <= 0)
+                return;
+
+            // Convert damage to XP contribution
+            float baseXp =
+                damage * ConfigCache.BallistaDamageFactor;
+
+            float distanceMultiplier = 
+                CalculateBallistaDistanceMultiplier(distanceMeters);
+
+            // Safety clamp
+            baseXp = MathF.Clamp(
+                baseXp,
+                ConfigCache.BallistaDamageXpMin,
+                ConfigCache.BallistaDamageXpMax);
+
+            float finalXp = baseXp * distanceMultiplier;
+
+            int xp = MBRandom.RoundRandomized(finalXp);
+            if (xp <= 0)
+                return;
+
+            hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+
+            if (ConfigCache.BallistaXpDebug && hero.IsHumanPlayerCharacter)
+            {
+                DisplayBallistaDebugMessage(
+                    xp,
+                    distanceMeters,
+                    damage,
+                    baseXp,
+                    distanceMultiplier,
+                    ConfigCache.BallistaDamageFactor,
+                    finalXp
+                );
+            }
+        }
+
+
         // ======================
         // Helpers
         // ======================
@@ -132,6 +182,42 @@ namespace Bannerlord.ShipmasterReworked.Systems
                 $"Speed: {speed:F2}, Base XP: {baseXp:F2}, " +
                 $"Multiplier: {multiplier:F2}, Final XP: {finalXp:F2}.{stormText}"
             ));
+        }
+
+        private static void DisplayBallistaDebugMessage(
+            int xp,
+            float distance,
+            int damage,
+            float baseXp,
+            float multiplier,
+            float damageFactor,
+            float finalXp)
+        {
+            InformationManager.DisplayMessage(new InformationMessage(
+                $"[Shipmaster Reworked] Granted {xp} Shipmaster XP for ballista hit. " +
+                $"Distance: {distance:F1}m, Damage: {damage}, " +
+                $"Base XP: {baseXp}, Distance Multiplier: {multiplier}, " +
+                $"Damage Factor: {damageFactor:F2}, Final XP: {finalXp:F2}"
+            ));
+        }
+
+        private static float CalculateBallistaDistanceMultiplier(float distanceMeters)
+        {
+            float multiplier = 1f;
+
+            if (distanceMeters >= ConfigCache.BallistaTier1Distance)
+                multiplier = ConfigCache.BallistaTier1Multiplier;
+
+            if (distanceMeters >= ConfigCache.BallistaTier2Distance)
+                multiplier = ConfigCache.BallistaTier2Multiplier;
+
+            if (distanceMeters >= ConfigCache.BallistaTier3Distance)
+                multiplier = ConfigCache.BallistaTier3Multiplier;
+
+            if (distanceMeters >= ConfigCache.BallistaTier4Distance)
+                multiplier = ConfigCache.BallistaTier4Multiplier;
+
+            return multiplier;
         }
 
         private static bool IsValidHero(Hero hero)
