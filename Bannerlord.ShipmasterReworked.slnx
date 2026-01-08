@@ -12,7 +12,12 @@
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
     <File Path="LICENSE.txt" />
+    <File Path="markdowntobbcode.ps1" />
     <File Path="README.md" />
+    <File Path="README_BBCODE_NM.txt" />
+    <File Path="README_BBCODE_Steam.txt" />
+    <File Path="upload-workshop.ps1" />
+    <File Path="WorkshopUpdate.xml" />
   </Folder>
   <Project Path="Bannerlord.ShipmasterReworked/Bannerlord.ShipmasterReworked.csproj">
     <Platform Project="x64" />

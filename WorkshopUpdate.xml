@@ -1,0 +1,12 @@
+<Tasks>
+	<GetItem>
+		<ItemId Value="3634341151"/>
+		<!-- Can be found in the URL of your workshop item -->
+	</GetItem>
+	<UpdateItem>
+		<ModuleFolder Value=""/>
+		<!-- A direct path of your module -->	
+		<ChangeNotes Value="Add update for experience from using siege engines on ships"/>
+		<!-- Insert patch notes -->
+	</UpdateItem>
+</Tasks>
