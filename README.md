@@ -31,7 +31,7 @@ This mod is compatible with the latest version of Mount & Blade II: Bannerlord a
 
 Shipmaster experience gained from ramming is calculated using the following formula:
 
-``XP = BaseXP × DamagePercent × (1 + RamQuality × QualityFactor)``
+``XP = BaseXP Ã— DamagePercent Ã— (1 + RamQuality Ã— QualityFactor)``
 Where:
 - **BaseXP**: The base experience points for ramming (default is 80 XP).
 - **DamagePercent**: The percentage of damage dealt to the target ship (0 to 100). For exceptional rams, this value can exceed 100% slightly, so hard limit I set is 150%.
@@ -72,7 +72,7 @@ First the code responsible for this:
 ```
 
 Now translated to human language:
-``XP = DamageDealt × BallistaDamageFactor × DistanceMultiplier``
+``XP = DamageDealt Ã— BallistaDamageFactor Ã— DistanceMultiplier``
 Where:
 - **DamageDealt**: The amount of damage dealt to the ship by the ballista.
 - **BallistaDamageFactor**: A configurable factor that scales the experience gained from ballista damage.
@@ -90,7 +90,7 @@ That value is then rounded to the nearest integer, and then multiplied by the le
 When hitting an agent (crew member) on a ship with a ballista, the experience is derived from what you gain towards the Engineering skill in vanilla game, multiplied by a configurable factor:
 
 The calculation is as follows:
-``XP = EngineeringXP × BallistaAgentDamageFactor``
+``XP = EngineeringXP Ã— BallistaAgentDamageFactor``
 Where:
 - **EngineeringXP**: The experience points gained towards the Engineering skill from hitting an agent with a ballista (from testing it seems it equals to the damage dealt).
 - **BallistaAgentDamageFactor**: A configurable factor that scales the experience gained from hitting agents with ballista.
@@ -120,4 +120,4 @@ If you encounter any issues or have suggestions for improvements, please open an
 ## Extra Links
 
 - [Nexus Mods](https://www.nexusmods.com/mountandblade2bannerlord/mods/9570)
-- Discord: (I don't have a server yet, if you need to contact me on Discord, please send me a message: puszkapotato)
+- [Discord - Vee Workshop](https://discord.gg/YcJQkkSuau)
