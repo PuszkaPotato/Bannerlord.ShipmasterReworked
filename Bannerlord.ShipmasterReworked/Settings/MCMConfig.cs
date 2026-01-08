@@ -14,8 +14,10 @@ namespace Bannerlord.ShipmasterReworked.Settings
         private float _rammingXpQualityFactor = 0.15f;
 
         private float _ballistaDamageFactor = 0.05f;
+        private float _ballistaAgentDamageFactor = 0.5f;
         private float _ballistaDamageXpMin = 5f;
         private float _ballistaDamageXpMax = 125f;
+
         private float _ballistaTier1Distance = 10f;
         private float _ballistaTier2Distance = 180f;
         private float _ballistaTier3Distance = 250f;
@@ -100,7 +102,16 @@ namespace Bannerlord.ShipmasterReworked.Settings
             set => SetAndRefresh(ref _ballistaDamageFactor, value);
         }
 
-        [SettingPropertyFloatingInteger("Ballista Damage XP Minimum", 1f, 400f, "#0.00", Order = 2, RequireRestart = false,
+        [SettingPropertyFloatingInteger("Ballista Agent Damage Factor", 0.0f, 5.0f, "#0.00", Order = 2, RequireRestart = false,
+            HintText = "Factor to calculate Shipmaster XP from ballista damage dealt to agents (crew/captains).")]
+        [SettingPropertyGroup("Ballista XP Settings", GroupOrder = 3)]
+        public float BallistaAgentDamageFactor
+        {
+            get => _ballistaAgentDamageFactor;
+            set => SetAndRefresh(ref _ballistaAgentDamageFactor, value);
+        }
+
+        [SettingPropertyFloatingInteger("Ballista Damage XP Minimum", 1f, 125, "#0.00", Order = 3, RequireRestart = false,
             HintText = "Minimum Shipmaster XP gained from ballista damage.")]
         [SettingPropertyGroup("Ballista XP Settings", GroupOrder = 3)]
         public float BallistaDamageXpMin
@@ -109,7 +120,7 @@ namespace Bannerlord.ShipmasterReworked.Settings
             set => SetAndRefresh(ref _ballistaDamageXpMin, value);
         }
 
-        [SettingPropertyFloatingInteger("Ballista Damage XP Maximum", 10f, 800f, "#0.00", Order = 3, RequireRestart = false,
+        [SettingPropertyFloatingInteger("Ballista Damage XP Maximum", 125, 800f, "#0.00", Order = 4, RequireRestart = false,
             HintText = "Maximum Shipmaster XP gained from ballista damage.")]
         [SettingPropertyGroup("Ballista XP Settings", GroupOrder = 3)]
         public float BallistaDamageXpMax
@@ -118,7 +129,7 @@ namespace Bannerlord.ShipmasterReworked.Settings
             set => SetAndRefresh(ref _ballistaDamageXpMax, value);
         }
 
-        [SettingPropertyFloatingInteger("Ballista Tier 1 Distance", 10f, 500f, "#0", Order = 1, RequireRestart = false,
+        [SettingPropertyFloatingInteger("Ballista Tier 1 Distance", 10f, 180f, "#0", Order = 1, RequireRestart = false,
             HintText = "Minimum distance (in meters) for Ballista XP Tier 1.")]
         [SettingPropertyGroup("Ballista XP Settings/Advanced Distance Tiers")]
         public float BallistaTier1Distance
@@ -136,7 +147,7 @@ namespace Bannerlord.ShipmasterReworked.Settings
             set => SetAndRefresh(ref _ballistaTier1Multiplier, value);
         }
 
-        [SettingPropertyFloatingInteger("Ballista Tier 2 Distance", 10f, 800f, "#0", Order = 3, RequireRestart = false,
+        [SettingPropertyFloatingInteger("Ballista Tier 2 Distance", 180f, 250f, "#0", Order = 3, RequireRestart = false,
             HintText = "Minimum distance (in meters) for Ballista XP Tier 2.")]
         [SettingPropertyGroup("Ballista XP Settings/Advanced Distance Tiers")]
         public float BallistaTier2Distance
@@ -154,7 +165,7 @@ namespace Bannerlord.ShipmasterReworked.Settings
             set => SetAndRefresh(ref _ballistaTier2Multiplier, value);
         }
 
-        [SettingPropertyFloatingInteger("Ballista Tier 3 Distance", 10f, 1200f, "#0", Order = 5, RequireRestart = false,
+        [SettingPropertyFloatingInteger("Ballista Tier 3 Distance", 250f, 500f, "#0", Order = 5, RequireRestart = false,
             HintText = "Minimum distance (in meters) for Ballista XP Tier 3.")]
         [SettingPropertyGroup("Ballista XP Settings/Advanced Distance Tiers")]
         public float BallistaTier3Distance
@@ -172,7 +183,7 @@ namespace Bannerlord.ShipmasterReworked.Settings
             set => SetAndRefresh(ref _ballistaTier3Multiplier, value);
         }
 
-        [SettingPropertyFloatingInteger("Ballista Tier 4 Distance", 10f, 2000f, "#0", Order = 7, RequireRestart = false,
+        [SettingPropertyFloatingInteger("Ballista Tier 4 Distance", 500f, 2000f, "#0", Order = 7, RequireRestart = false,
             HintText = "Minimum distance (in meters) for Ballista XP Tier 4 (exceptional shots).")]
         [SettingPropertyGroup("Ballista XP Settings/Advanced Distance Tiers")]
         public float BallistaTier4Distance

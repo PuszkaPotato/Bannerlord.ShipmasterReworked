@@ -102,11 +102,9 @@ namespace Bannerlord.ShipmasterReworked.Systems
                 return;
 
             // Convert damage to XP contribution
-            float baseXp =
-                damage * ConfigCache.BallistaDamageFactor;
+            float baseXp = damage * ConfigCache.BallistaDamageFactor;
 
-            float distanceMultiplier = 
-                CalculateBallistaDistanceMultiplier(distanceMeters);
+            float distanceMultiplier = CalculateBallistaDistanceMultiplier(distanceMeters);
 
             // Safety clamp
             baseXp = MathF.Clamp(
@@ -136,6 +134,33 @@ namespace Bannerlord.ShipmasterReworked.Systems
             }
         }
 
+        public static void OnBallistaHitAgent(Hero hero, int engineeringXp)
+        {
+            if (!IsValidHero(hero))
+                return;
+
+            if (engineeringXp <= 0)
+                return;
+
+            // Apply a factor to the engineering XP for Shipmaster
+            float baseXp = engineeringXp * ConfigCache.BallistaAgentDamageFactor;
+
+            int xp = MBRandom.RoundRandomized(baseXp);
+            if (xp <= 0)
+                return;
+
+            hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+
+            if (ConfigCache.BallistaXpDebug && hero.IsHumanPlayerCharacter)
+            {
+                DisplayBallistaAgentDebugMessage(
+                    xp,
+                    engineeringXp,
+                    ConfigCache.BallistaAgentDamageFactor,
+                    baseXp
+                );
+            }
+        }
 
         // ======================
         // Helpers
@@ -228,8 +253,21 @@ namespace Bannerlord.ShipmasterReworked.Systems
             InformationManager.DisplayMessage(new InformationMessage(
                 $"[Shipmaster Reworked] Granted {xp} Shipmaster XP for ballista hit. " +
                 $"Distance: {distance:F1}m, Damage: {damage}, " +
-                $"Base XP: {baseXp}, Distance Multiplier: {multiplier}, " +
-                $"Damage Factor: {damageFactor:F2}, Final XP: {finalXp:F2}"
+                $"Base XP: {baseXp:F2}, Distance Multiplier: {multiplier:F2}, " +
+                $"Damage Factor: {damageFactor:F3}, Final XP: {finalXp:F2}."
+            ));
+        }
+
+        private static void DisplayBallistaAgentDebugMessage(
+            int xp,
+            int engineeringXp,
+            float damageFactor,
+            float baseXp)
+        {
+            InformationManager.DisplayMessage(new InformationMessage(
+                $"[Shipmaster Reworked] Granted {xp} Shipmaster XP for ballista hit on agent. " +
+                $"Engineering XP: {engineeringXp}, Damage Factor: {damageFactor:F2}, " +
+                $"Base XP: {baseXp:F2}."
             ));
         }
 
