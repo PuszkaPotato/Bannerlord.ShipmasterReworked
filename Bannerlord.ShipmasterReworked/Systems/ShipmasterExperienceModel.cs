@@ -10,8 +10,6 @@ namespace Bannerlord.ShipmasterReworked.Systems
 {
     public static class ShipmasterExperienceModel
     {
-        private const int BaseMaxShips = 3;
-
         public static void OnTravel(Hero hero, float speed)
         {
             if (!IsValidHero(hero))
@@ -78,11 +76,14 @@ namespace Bannerlord.ShipmasterReworked.Systems
 
             if (ConfigCache.RammingXpDebug && hero.IsHumanPlayerCharacter)
             {
-                InformationManager.DisplayMessage(new InformationMessage(
-                    $"[Shipmaster Reworked] Granted {xp} Shipmaster XP for ramming. " +
-                    $"Damage: {damagePercent:P2}, Ram Quality: {ramQuality}, " +
-                    $"Base XP: {baseXp}, Quality Factor: {qualityFactor}, Raw XP: {rawXp:F2}"
-                ));
+                DisplayRammingDebugMessage(
+                    xp,
+                    damagePercent,
+                    ramQuality,
+                    baseXp,
+                    qualityFactor,
+                    rawXp
+                );
             }
         }
 
@@ -90,25 +91,35 @@ namespace Bannerlord.ShipmasterReworked.Systems
         // Helpers
         // ======================
 
+        private static int GetOptimalShipCount(MobileParty party)
+        {
+            const int BaseMaxShips = 3;
+            int optimalShipCount = BaseMaxShips;
+            if (party.HasPerk(NavalPerks.Shipmaster.ShoreMaster))
+                optimalShipCount++;
+            if (party.HasPerk(NavalPerks.Shipmaster.FleetCommander))
+                optimalShipCount++;
+            return optimalShipCount;
+        }
+
+        private static bool IsOptimalShipCount(MobileParty party)
+        {
+            int shipCount = party.Ships?.Count ?? 0;
+            return shipCount == GetOptimalShipCount(party);
+        }
+
         private static float CalculateTravelMultiplier(
             MobileParty party,
             int shipCount,
             bool isInStorm)
         {
-            int optimalShipCount = BaseMaxShips;
-
-            if (party.HasPerk(NavalPerks.Shipmaster.ShoreMaster))
-                optimalShipCount++;
-
-            if (party.HasPerk(NavalPerks.Shipmaster.FleetCommander))
-                optimalShipCount++;
-
             float multiplier = 1f;
 
             // Exact match by design
-            if (shipCount == optimalShipCount)
+            if (IsOptimalShipCount(party))
                 multiplier *= ConfigCache.TravelXpMultiplier;
 
+            // Extra multiplier for travelling in storm
             if (isInStorm)
                 multiplier *= ConfigCache.StormTravelXpMultiplier;
 
@@ -123,14 +134,35 @@ namespace Bannerlord.ShipmasterReworked.Systems
             float finalXp,
             bool isInStorm)
         {
+            int optimalShipCount = GetOptimalShipCount(MobileParty.MainParty);
+
             string stormText = isInStorm
                 ? $" Storm Multiplier: {ConfigCache.StormTravelXpMultiplier}."
                 : string.Empty;
 
+            string optimalShipCountText = IsOptimalShipCount(MobileParty.MainParty)
+                ? " Optimal ship count bonus applied."
+                : $" Non-optimal number of ships, bonus not applied. Optimal ship count is {optimalShipCount}.";
+
             InformationManager.DisplayMessage(new InformationMessage(
                 $"[Shipmaster Reworked] Granted {xp} Shipmaster XP for travel. " +
                 $"Speed: {speed:F2}, Base XP: {baseXp:F2}, " +
-                $"Multiplier: {multiplier:F2}, Final XP: {finalXp:F2}.{stormText}"
+                $"Multiplier: {multiplier:F2}, Final XP: {finalXp:F2}.{stormText}{optimalShipCountText}"
+            ));
+        }
+
+        private static void DisplayRammingDebugMessage(
+            int xp,
+            float damagePercent,
+            int ramQuality,
+            int baseXp,
+            float qualityFactor,
+            float rawXp)
+        {
+            InformationManager.DisplayMessage(new InformationMessage(
+                $"[Shipmaster Reworked] Granted {xp} Shipmaster XP for ramming. " +
+                $"Damage: {damagePercent:P2}, Ram Quality: {ramQuality}, " +
+                $"Base XP: {baseXp}, Quality Factor: {qualityFactor}, Raw XP: {rawXp:F2}."
             ));
         }
 
