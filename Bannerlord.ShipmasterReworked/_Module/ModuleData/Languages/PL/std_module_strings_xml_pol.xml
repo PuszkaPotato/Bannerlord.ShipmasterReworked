@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+	<tags>
+		<tag language="Polski" />
+	</tags>
+	<strings>
+		<!-- Travel XP Settings -->
+		<string id="shipmaster_reworked_travel_xp_multiplier" text="Mnożnik Doświadczenia z Podróży" />
+		<string id="shipmaster_reworked_travel_xp_multiplier_hint" text="Mnożnik doświadczenia Kapitana zdobywanego podczas podróży." />
+		<string id="shipmaster_reworked_enable_storm_bonus" text="Włącz Bonus za Podróż w Sztormie" />
+		<string id="shipmaster_reworked_enable_storm_bonus_hint" text="Jeśli włączone, podróżowanie w burzliwej pogodzie zapewni dodatkowe doświadczenie Kapitana." />
+		<string id="shipmaster_reworked_storm_travel_xp_multiplier" text="Mnożnik Bonusu za Podróż w Sztormie" />
+		<string id="shipmaster_reworked_storm_travel_xp_multiplier_hint" text="Dodatkowy mnożnik doświadczenia Kapitana podczas podróży w burzliwej pogodzie." />
+
+		<!-- Ramming XP Settings -->
+		<string id="shipmaster_reworked_ramming_xp_base" text="Podstawowe Doświadczenie za Taranowanie" />
+		<string id="shipmaster_reworked_ramming_xp_base_hint" text="Bazowe doświadczenie zdobywane z taranowania przed mnożnikami." />
+		<string id="shipmaster_reworked_ramming_xp_quality_factor" text="Współczynnik Jakości Taranowania" />
+		<string id="shipmaster_reworked_ramming_xp_quality_factor_hint" text="Współczynnik mnożnika jakości taranowania wpływający na zdobywane doświadczenie." />
+
+		<!-- Ballista XP Settings -->
+		<string id="shipmaster_reworked_ballista_damage_factor" text="Współczynnik Obrażeń Balisty" />
+		<string id="shipmaster_reworked_ballista_damage_factor_hint" text="Współczynnik do obliczania doświadczenia Kapitana z obrażeń zadanych balistą." />
+		<string id="shipmaster_reworked_ballista_agent_damage_factor" text="Współczynnik Obrażeń Balisty na Jednostki" />
+		<string id="shipmaster_reworked_ballista_agent_damage_factor_hint" text="Współczynnik do obliczania doświadczenia Kapitana z obrażeń zadanych balistą jednostkom (załoga/kapitanowie)." />
+		<string id="shipmaster_reworked_ballista_damage_xp_min" text="Minimalne Doświadczenie z Obrażeń Balisty" />
+		<string id="shipmaster_reworked_ballista_damage_xp_min_hint" text="Minimalne doświadczenie Kapitana zdobywane z obrażeń balisty." />
+		<string id="shipmaster_reworked_ballista_damage_xp_max" text="Maksymalne Doświadczenie z Obrażeń Balisty" />
+		<string id="shipmaster_reworked_ballista_damage_xp_max_hint" text="Maksymalne doświadczenie Kapitana zdobywane z obrażeń balisty." />
+
+		<!-- Ballista Distance Tiers -->
+		<string id="shipmaster_reworked_ballista_tier1_distance" text="Odległość Poziomu 1 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier1_distance_hint" text="Minimalna odległość (w metrach) dla Poziomu 1 doświadczenia z balisty." />
+		<string id="shipmaster_reworked_ballista_tier1_multiplier" text="Mnożnik Poziomu 1 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier1_multiplier_hint" text="Mnożnik doświadczenia stosowany po osiągnięciu odległości Poziomu 1 balisty." />
+		<string id="shipmaster_reworked_ballista_tier2_distance" text="Odległość Poziomu 2 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier2_distance_hint" text="Minimalna odległość (w metrach) dla Poziomu 2 doświadczenia z balisty." />
+		<string id="shipmaster_reworked_ballista_tier2_multiplier" text="Mnożnik Poziomu 2 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier2_multiplier_hint" text="Mnożnik doświadczenia stosowany po osiągnięciu odległości Poziomu 2 balisty." />
+		<string id="shipmaster_reworked_ballista_tier3_distance" text="Odległość Poziomu 3 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier3_distance_hint" text="Minimalna odległość (w metrach) dla Poziomu 3 doświadczenia z balisty." />
+		<string id="shipmaster_reworked_ballista_tier3_multiplier" text="Mnożnik Poziomu 3 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier3_multiplier_hint" text="Mnożnik doświadczenia stosowany po osiągnięciu odległości Poziomu 3 balisty." />
+		<string id="shipmaster_reworked_ballista_tier4_distance" text="Odległość Poziomu 4 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier4_distance_hint" text="Minimalna odległość (w metrach) dla Poziomu 4 doświadczenia z balisty (wyjątkowe strzały)." />
+		<string id="shipmaster_reworked_ballista_tier4_multiplier" text="Mnożnik Poziomu 4 Balisty" />
+		<string id="shipmaster_reworked_ballista_tier4_multiplier_hint" text="Mnożnik doświadczenia stosowany po osiągnięciu odległości Poziomu 4 balisty." />
+
+		<!-- Debug Settings -->
+		<string id="shipmaster_reworked_travel_xp_debug" text="Włącz Komunikaty Debugowania Doświadczenia z Podróży" />
+		<string id="shipmaster_reworked_travel_xp_debug_hint" text="Jeśli włączone, komunikaty debugowania będą wyświetlane podczas zdobywania doświadczenia Kapitana z podróży." />
+		<string id="shipmaster_reworked_ramming_xp_debug" text="Włącz Komunikaty Debugowania Doświadczenia z Taranowania" />
+		<string id="shipmaster_reworked_ramming_xp_debug_hint" text="Jeśli włączone, komunikaty debugowania będą wyświetlane podczas zdobywania doświadczenia Kapitana z taranowania." />
+		<string id="shipmaster_reworked_ballista_xp_debug" text="Włącz Komunikaty Debugowania Doświadczenia z Balisty" />
+		<string id="shipmaster_reworked_ballista_xp_debug_hint" text="Jeśli włączone, komunikaty debugowania będą wyświetlane podczas zdobywania doświadczenia Kapitana z obrażeń balisty." />
+
+		<!-- Debug Messages -->
+		<string id="shipmaster_reworked_debug_travel" text="[Shipmaster Reworked] Przyznano {XP} doświadczenia Kapitana za podróż. Prędkość: {SPEED}, Bazowe Dośw.: {BASE_XP}, Mnożnik: {MULTIPLIER}, Końcowe Dośw.: {FINAL_XP}.{STORM_TEXT}{OPTIMAL_TEXT}" />
+		<string id="shipmaster_reworked_debug_storm_text" text=" Mnożnik Sztormu: {STORM_MULTIPLIER}." />
+		<string id="shipmaster_reworked_debug_optimal_yes" text=" Zastosowano bonus za optymalną liczbę statków." />
+		<string id="shipmaster_reworked_debug_optimal_no" text=" Nieoptymalna liczba statków, bonus nie został zastosowany. Optymalna liczba statków to {OPTIMAL_COUNT}." />
+		<string id="shipmaster_reworked_debug_ramming" text="[Shipmaster Reworked] Przyznano {XP} doświadczenia Kapitana za taranowanie. Obrażenia: {DAMAGE_PERCENT}, Jakość Taranu: {RAM_QUALITY}, Bazowe Dośw.: {BASE_XP}, Współczynnik Jakości: {QUALITY_FACTOR}, Surowe Dośw.: {RAW_XP}." />
+		<string id="shipmaster_reworked_debug_ballista" text="[Shipmaster Reworked] Przyznano {XP} doświadczenia Kapitana za trafienie balistą. Odległość: {DISTANCE}m, Obrażenia: {DAMAGE}, Bazowe Dośw.: {BASE_XP}, Mnożnik Odległości: {MULTIPLIER}, Współczynnik Obrażeń: {DAMAGE_FACTOR}, Końcowe Dośw.: {FINAL_XP}." />
+		<string id="shipmaster_reworked_debug_ballista_agent" text="[Shipmaster Reworked] Przyznano {XP} doświadczenia Kapitana za trafienie balistą w jednostkę. Dośw. Inżynieryjne: {ENGINEERING_XP}, Współczynnik Obrażeń: {DAMAGE_FACTOR}, Bazowe Dośw.: {BASE_XP}." />
+
+		<!-- Group Names -->
+		<string id="shipmaster_reworked_group_travel" text="Ustawienia Doświadczenia z Podróży" />
+		<string id="shipmaster_reworked_group_ramming" text="Ustawienia Doświadczenia z Taranowania" />
+		<string id="shipmaster_reworked_group_ballista" text="Ustawienia Doświadczenia z Balisty" />
+		<string id="shipmaster_reworked_group_ballista_advanced" text="Zaawansowane Poziomy Odległości" />
+		<string id="shipmaster_reworked_group_debug" text="Ustawienia Debugowania" />
+	</strings>
+</base>

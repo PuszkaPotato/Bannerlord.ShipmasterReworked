@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<base xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" type="string">
+  <tags>
+    <tag language="English" />
+  </tags>
+  <strings>
+    <!-- Travel XP Settings -->
+    <string id="shipmaster_reworked_travel_xp_multiplier" text="Travel XP Multiplier" />
+    <string id="shipmaster_reworked_travel_xp_multiplier_hint" text="Multiplier for Shipmaster XP gained from traveling." />
+    <string id="shipmaster_reworked_enable_storm_bonus" text="Enable Storm Travel Bonus" />
+    <string id="shipmaster_reworked_enable_storm_bonus_hint" text="If enabled, traveling in stormy weather will provide additional Shipmaster XP." />
+    <string id="shipmaster_reworked_storm_travel_xp_multiplier" text="Storm Travel XP Bonus Multiplier" />
+    <string id="shipmaster_reworked_storm_travel_xp_multiplier_hint" text="Additional multiplier for Shipmaster XP when traveling in stormy weather." />
+    
+    <!-- Ramming XP Settings -->
+    <string id="shipmaster_reworked_ramming_xp_base" text="Ramming XP Base" />
+    <string id="shipmaster_reworked_ramming_xp_base_hint" text="Base XP gained from ramming before multipliers." />
+    <string id="shipmaster_reworked_ramming_xp_quality_factor" text="Ramming XP Quality Factor" />
+    <string id="shipmaster_reworked_ramming_xp_quality_factor_hint" text="Multiplier factor for ramming quality affecting XP gained." />
+    
+    <!-- Ballista XP Settings -->
+    <string id="shipmaster_reworked_ballista_damage_factor" text="Ballista Damage XP Factor" />
+    <string id="shipmaster_reworked_ballista_damage_factor_hint" text="Factor to calculate Shipmaster XP from ballista damage dealt." />
+    <string id="shipmaster_reworked_ballista_agent_damage_factor" text="Ballista Agent Damage Factor" />
+    <string id="shipmaster_reworked_ballista_agent_damage_factor_hint" text="Factor to calculate Shipmaster XP from ballista damage dealt to agents (crew/captains)." />
+    <string id="shipmaster_reworked_ballista_damage_xp_min" text="Ballista Damage XP Minimum" />
+    <string id="shipmaster_reworked_ballista_damage_xp_min_hint" text="Minimum Shipmaster XP gained from ballista damage." />
+    <string id="shipmaster_reworked_ballista_damage_xp_max" text="Ballista Damage XP Maximum" />
+    <string id="shipmaster_reworked_ballista_damage_xp_max_hint" text="Maximum Shipmaster XP gained from ballista damage." />
+    
+    <!-- Ballista Distance Tiers -->
+    <string id="shipmaster_reworked_ballista_tier1_distance" text="Ballista Tier 1 Distance" />
+    <string id="shipmaster_reworked_ballista_tier1_distance_hint" text="Minimum distance (in meters) for Ballista XP Tier 1." />
+    <string id="shipmaster_reworked_ballista_tier1_multiplier" text="Ballista Tier 1 Multiplier" />
+    <string id="shipmaster_reworked_ballista_tier1_multiplier_hint" text="XP multiplier applied when Ballista Tier 1 distance is reached." />
+    <string id="shipmaster_reworked_ballista_tier2_distance" text="Ballista Tier 2 Distance" />
+    <string id="shipmaster_reworked_ballista_tier2_distance_hint" text="Minimum distance (in meters) for Ballista XP Tier 2." />
+    <string id="shipmaster_reworked_ballista_tier2_multiplier" text="Ballista Tier 2 Multiplier" />
+    <string id="shipmaster_reworked_ballista_tier2_multiplier_hint" text="XP multiplier applied when Ballista Tier 2 distance is reached." />
+    <string id="shipmaster_reworked_ballista_tier3_distance" text="Ballista Tier 3 Distance" />
+    <string id="shipmaster_reworked_ballista_tier3_distance_hint" text="Minimum distance (in meters) for Ballista XP Tier 3." />
+    <string id="shipmaster_reworked_ballista_tier3_multiplier" text="Ballista Tier 3 Multiplier" />
+    <string id="shipmaster_reworked_ballista_tier3_multiplier_hint" text="XP multiplier applied when Ballista Tier 3 distance is reached." />
+    <string id="shipmaster_reworked_ballista_tier4_distance" text="Ballista Tier 4 Distance" />
+    <string id="shipmaster_reworked_ballista_tier4_distance_hint" text="Minimum distance (in meters) for Ballista XP Tier 4 (exceptional shots)." />
+    <string id="shipmaster_reworked_ballista_tier4_multiplier" text="Ballista Tier 4 Multiplier" />
+    <string id="shipmaster_reworked_ballista_tier4_multiplier_hint" text="XP multiplier applied when Ballista Tier 4 distance is reached." />
+    
+    <!-- Debug Settings -->
+    <string id="shipmaster_reworked_travel_xp_debug" text="Enable Travel XP Debug Messages" />
+    <string id="shipmaster_reworked_travel_xp_debug_hint" text="If enabled, debug messages will be displayed when gaining Shipmaster XP from traveling." />
+    <string id="shipmaster_reworked_ramming_xp_debug" text="Enable Ramming XP Debug Messages" />
+    <string id="shipmaster_reworked_ramming_xp_debug_hint" text="If enabled, debug messages will be displayed when gaining Shipmaster XP from ramming." />
+    <string id="shipmaster_reworked_ballista_xp_debug" text="Enable Ballista XP Debug Messages" />
+    <string id="shipmaster_reworked_ballista_xp_debug_hint" text="If enabled, debug messages will be displayed when gaining Shipmaster XP from ballista damage." />
+    
+    <!-- Debug Messages -->
+    <string id="shipmaster_reworked_debug_travel" text="[Shipmaster Reworked] Granted {XP} Shipmaster XP for travel. Speed: {SPEED}, Base XP: {BASE_XP}, Multiplier: {MULTIPLIER}, Final XP: {FINAL_XP}.{STORM_TEXT}{OPTIMAL_TEXT}" />
+    <string id="shipmaster_reworked_debug_storm_text" text=" Storm Multiplier: {STORM_MULTIPLIER}." />
+    <string id="shipmaster_reworked_debug_optimal_yes" text=" Optimal ship count bonus applied." />
+    <string id="shipmaster_reworked_debug_optimal_no" text=" Non-optimal number of ships, bonus not applied. Optimal ship count is {OPTIMAL_COUNT}." />
+    <string id="shipmaster_reworked_debug_ramming" text="[Shipmaster Reworked] Granted {XP} Shipmaster XP for ramming. Damage: {DAMAGE_PERCENT}, Ram Quality: {RAM_QUALITY}, Base XP: {BASE_XP}, Quality Factor: {QUALITY_FACTOR}, Raw XP: {RAW_XP}." />
+    <string id="shipmaster_reworked_debug_ballista" text="[Shipmaster Reworked] Granted {XP} Shipmaster XP for ballista hit. Distance: {DISTANCE}m, Damage: {DAMAGE}, Base XP: {BASE_XP}, Distance Multiplier: {MULTIPLIER}, Damage Factor: {DAMAGE_FACTOR}, Final XP: {FINAL_XP}." />
+    <string id="shipmaster_reworked_debug_ballista_agent" text="[Shipmaster Reworked] Granted {XP} Shipmaster XP for ballista hit on agent. Engineering XP: {ENGINEERING_XP}, Damage Factor: {DAMAGE_FACTOR}, Base XP: {BASE_XP}." />
+    
+    <!-- Group Names -->
+    <string id="shipmaster_reworked_group_travel" text="Travel XP Settings" />
+    <string id="shipmaster_reworked_group_ramming" text="Ramming XP Settings" />
+    <string id="shipmaster_reworked_group_ballista" text="Ballista XP Settings" />
+    <string id="shipmaster_reworked_group_ballista_advanced" text="Ballista XP Settings/Advanced Distance Tiers" />
+    <string id="shipmaster_reworked_group_debug" text="Debug Settings" />
+  </strings>
+</base>
