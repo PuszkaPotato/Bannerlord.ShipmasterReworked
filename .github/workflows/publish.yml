@@ -1,0 +1,31 @@
+name: Build & Publish
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: BUTR/workflows/.github/workflows/build-bannerlord.yml@master
+    with:
+      project_path: Bannerlord.ShipmasterReworked.csproj
+
+  publish-github:
+    needs: build
+    uses: BUTR/workflows/.github/workflows/release-github.yml@master
+    with:
+      mod_id: Bannerlord.ShipmasterReworked
+      artifact_name: bannerlord
+
+  publish-nexusmods:
+    needs: build
+    uses: BUTR/workflows/.github/workflows/release-nexusmods.yml@master
+    with:
+      nexusmods_game_id: mountandblade2bannerlord
+      mod_filename: Bannerlord.ShipmasterReworked
+      artifact_name: bannerlord
+    secrets:
+      NEXUSMODS_APIKEY: ${{ secrets.NEXUSMODS_APIKEY }}
+      NEXUSMODS_COOKIES: ${{ secrets.NEXUSMODS_COOKIES }}
+      NEXUSMODS_MOD_ID: ${{ secrets.NEXUSMODS_MOD_ID }}
