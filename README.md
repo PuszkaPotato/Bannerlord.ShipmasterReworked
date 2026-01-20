@@ -107,6 +107,16 @@ Ballista distance multiplier is applied only for hits on ships and is using the 
 
 Distance multipliers are configurable but I believe default settings are balanced, this setting is also considered for advanced users, and has its own subcategory in MCM.
 
+## Translations
+
+This mod includes translations for the following languages:
+- English
+- Polish
+
+You can contribute translations for other languages by submitting a pull request on the [GitHub repository](https://github.com/puszkapotato/Bannerlord.ShipmasterReworked).
+
+If you need help with Github or translation process, feel free to join the [Discord - Vee Workshop](https://discord.gg/YcJQkkSuau) and ask for assistance.
+
 
 ## License
 This mod is released under the MIT License. See the [LICENSE](https://github.com/PuszkaPotato/Bannerlord.ShipmasterReworked/blob/master/LICENSE.txt) file for more details.

@@ -33,7 +33,7 @@ This mod is compatible with the latest version of Mount & Blade II: Bannerlord a
 
 Shipmaster experience gained from ramming is calculated using the following formula:
 
-[b]XP = BaseXP � DamagePercent � (1 + RamQuality � QualityFactor)[/b]
+[b]XP = BaseXP × DamagePercent × (1 + RamQuality × QualityFactor)[/b]
 Where:
 [list]
 [*] [b]BaseXP[/b]: The base experience points for ramming (default is 80 XP).
@@ -73,7 +73,7 @@ First the code responsible for this:
     float finalXp = baseXp * distanceMultiplier;
 [/code]
 
-Now translated to human language: [b]XP = DamageDealt � BallistaDamageFactor � DistanceMultiplier[/b]
+Now translated to human language: [b]XP = DamageDealt × BallistaDamageFactor × DistanceMultiplier[/b]
 Where:
 [list]
 [*] [b]DamageDealt[/b]: The amount of damage dealt to the ship by the ballista.
@@ -89,7 +89,7 @@ That value is then rounded to the nearest integer, and then multiplied by the le
 [h3]Hitting an Agent[/h3]
 When hitting an agent (crew member) on a ship with a ballista, the experience is derived from what you gain towards the Engineering skill in vanilla game, multiplied by a configurable factor:
 
-The calculation is as follows: [b]XP = EngineeringXP � BallistaAgentDamageFactor[/b]
+The calculation is as follows: [b]XP = EngineeringXP × BallistaAgentDamageFactor[/b]
 Where:
 [list]
 [*] [b]EngineeringXP[/b]: The experience points gained towards the Engineering skill from hitting an agent with a ballista (from testing it seems it equals to the damage dealt).
@@ -105,6 +105,17 @@ Ballista distance multiplier is applied only for hits on ships and is using the 
 
 Distance multipliers are configurable but I believe default settings are balanced, this setting is also considered for advanced users, and has its own subcategory in MCM.
 
+[h2]Translations[/h2]
+
+This mod includes translations for the following languages:
+[list]
+[*] English
+[*] Polish
+[/list]
+You can contribute translations for other languages by submitting a pull request on the [url=https://github.com/puszkapotato/Bannerlord.ShipmasterReworked]GitHub repository[/url].
+
+If you need help with Github or translation process, feel free to join the [url=https://discord.gg/YcJQkkSuau]Discord - Vee Workshop[/url] and ask for assistance.
+
 
 [h2]License[/h2]
 This mod is released under the MIT License. See the [url=https://github.com/PuszkaPotato/Bannerlord.ShipmasterReworked/blob/master/LICENSE.txt]LICENSE[/url] file for more details.
@@ -119,5 +130,5 @@ If you encounter any issues or have suggestions for improvements, please open an
 [h2]Extra Links[/h2]
 [list]
 [*] [url=https://www.nexusmods.com/mountandblade2bannerlord/mods/9570]Nexus Mods[/url]
-[*] Discord: (I don't have a server yet, if you need to contact me on Discord, please send me a message: puszkapotato)
+[*] [url=https://discord.gg/YcJQkkSuau]Discord - Vee Workshop[/url]
 [/list]
