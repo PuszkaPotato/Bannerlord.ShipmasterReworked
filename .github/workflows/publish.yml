@@ -7,9 +7,28 @@ on:
 
 jobs:
   build:
-    uses: BUTR/workflows/.github/workflows/build-bannerlord.yml@master
-    with:
-      project_path: Bannerlord.ShipmasterReworked.csproj
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build Bannerlord module
+        run: |
+          mkdir bannerlord
+          dotnet build Bannerlord.ShipmasterReworked.csproj \
+            -c Release \
+            -p:GameFolder="$PWD/bannerlord"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bannerlord
+          path: bannerlord
 
   publish-github:
     needs: build
