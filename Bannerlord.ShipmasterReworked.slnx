@@ -19,6 +19,9 @@
     <File Path="upload-workshop.ps1" />
     <File Path="WorkshopUpdate.xml" />
   </Folder>
+  <Folder Name="/Solution Items/workflows/">
+    <File Path=".github/workflows/publish.yml" />
+  </Folder>
   <Project Path="Bannerlord.ShipmasterReworked/Bannerlord.ShipmasterReworked.csproj">
     <Platform Project="x64" />
   </Project>
