@@ -52,6 +52,15 @@ jobs:
           name: bannerlord
           path: ./bannerlord/
 
+    publish-on-github:
+        needs: ["build-module"]
+        uses: BUTR/workflows/.github/workflows/release-github.yml@master
+        with:
+          mod_id: Bannerlord.ShipmasterReworked
+          mod_version: ${{ needs.build-module.outputs.version || github.ref_name }}
+          mod_description: ${{ github.event.release.body || 'Manual release' }}
+          artifact_name: bannerlord
+
      publish-on-nexusmods:
         needs: ["build-module"]
         uses: BUTR/workflows/.github/workflows/release-nexusmods.yml@master
@@ -65,25 +74,3 @@ jobs:
         secrets:
           NEXUSMODS_APIKEY: ${{ secrets.NEXUSMODS_APIKEY }}
           NEXUSMODS_COOKIES: ${{ secrets.NEXUSMODS_COOKIES }}
-
-     publish-on-github:
-        needs: ["build-module"]
-        uses: BUTR/workflows/.github/workflows/release-github.yml@master
-        with:
-          mod_id: Bannerlord.ShipmasterReworked
-          mod_version: ${{ needs.build-module.outputs.version || github.ref_name }}
-          mod_description: ${{ github.event.release.body || 'Manual release' }}
-          artifact_name: bannerlord
-
-    publish-on-steam:
-        needs: ["build-module"]
-        uses: BUTR/workflows/.github/workflows/release-steam.yml@master
-        with:
-        workshop_id: ${{ secrets.STEAM_WORKSHOP_ID }}
-        mod_id: Bannerlord.ShipmasterReworked
-        mod_description: ${{ github.event.release.body || 'Manual release' }}
-        artifact_name: bannerlord
-        secrets:
-        STEAM_LOGIN: ${{ secrets.STEAM_LOGIN }}
-        STEAM_PASSWORD: ${{ secrets.STEAM_PASSWORD }}
-        STEAM_AUTH_CODE: ${{ secrets.STEAM_AUTH_CODE }}
