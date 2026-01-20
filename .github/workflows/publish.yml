@@ -16,11 +16,12 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Build Bannerlord module
-        run: |
-          mkdir bannerlord
-          dotnet build Bannerlord.ShipmasterReworked.csproj \
-            -c Release \
-            -p:GameFolder="$PWD/bannerlord"
+          run: |
+            mkdir bannerlord
+            dotnet build **/*.csproj \
+              -c Release \
+              -p:GameFolder="$PWD/bannerlord"
+
 
       - uses: actions/upload-artifact@v4
         with:
