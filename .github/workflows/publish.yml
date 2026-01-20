@@ -9,11 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
@@ -24,8 +22,7 @@ jobs:
             -c Release \
             -p:GameFolder="$PWD/bannerlord"
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: bannerlord
           path: bannerlord
@@ -42,9 +39,9 @@ jobs:
     uses: BUTR/workflows/.github/workflows/release-nexusmods.yml@master
     with:
       nexusmods_game_id: mountandblade2bannerlord
+      nexusmods_mod_id: "YOUR_NUMERIC_MOD_ID"
       mod_filename: Bannerlord.ShipmasterReworked
       artifact_name: bannerlord
     secrets:
       NEXUSMODS_APIKEY: ${{ secrets.NEXUSMODS_APIKEY }}
-      NEXUSMODS_COOKIES: ${{ secrets.NEXUSMODS_COOKIES }}
-      NEXUSMODS_MOD_ID: ${{ secrets.NEXUSMODS_MOD_ID }}
+      NEXUSMODS_SESSION_COOKIE: ${{ secrets.NEXUSMODS_SESSION_COOKIE }}
