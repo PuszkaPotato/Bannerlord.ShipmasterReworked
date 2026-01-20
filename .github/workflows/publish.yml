@@ -1,26 +1,7 @@
-name: Publish
-
-on:
-  release:
-    types: [published]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version'
-        required: true
-        default: '1.3.1'
-
-env:
-  DOTNET_NOLOGO: true
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  DOTNET_CLI_TELEMETRY_OPTOUT: true
-
 jobs:
   build-module:
     name: Build Module
     runs-on: ubuntu-latest
-    outputs:
-      version: ${{ steps.version.outputs.version }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -34,19 +15,22 @@ jobs:
 
       - name: Get Version
         id: version
+        shell: bash
         run: |
           if [ "${{ github.event_name }}" == "release" ]; then
             echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
           else
             echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
           fi
-        shell: bash
 
       - name: Build Module
+        shell: pwsh
         run: |
           mkdir bannerlord
-          dotnet build Bannerlord.ShipmasterReworked.csproj --configuration Release -p:GameFolder="$PWD/bannerlord" -p:Version="${{ steps.version.outputs.version }}"
-        shell: pwsh
+          dotnet build Bannerlord.ShipmasterReworked.csproj `
+            --configuration Release `
+            -p:GameFolder="$PWD/bannerlord" `
+            -p:Version="${{ steps.version.outputs.version }}"
 
       - name: Upload Bannerlord Folder
         uses: actions/upload-artifact@v4
@@ -55,22 +39,22 @@ jobs:
           path: ./bannerlord/
 
   publish-on-github:
-    needs: ["build-module"]
+    needs: build-module
     uses: BUTR/workflows/.github/workflows/release-github.yml@master
     with:
       mod_id: Bannerlord.ShipmasterReworked
-      mod_version: ${{ needs.build-module.outputs.version || github.ref_name }}
+      mod_version: ${{ github.ref_name }}
       mod_description: ${{ github.event.release.body || 'Manual release' }}
       artifact_name: bannerlord
 
   publish-on-nexusmods:
-    needs: ["build-module"]
+    needs: build-module
     uses: BUTR/workflows/.github/workflows/release-nexusmods.yml@master
     with:
       nexusmods_game_id: mountandblade2bannerlord
       nexusmods_mod_id: ${{ secrets.NEXUSMODS_MOD_ID }}
       mod_filename: Bannerlord.ShipmasterReworked
-      mod_version: ${{ needs.build-module.outputs.version || github.ref_name }}
+      mod_version: ${{ github.ref_name }}
       mod_description: ${{ github.event.release.body || 'Manual release' }}
       artifact_name: bannerlord
     secrets:
