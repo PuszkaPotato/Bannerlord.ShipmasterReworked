@@ -1,0 +1,37 @@
+name: Release Module on NuGet/GPR
+
+on:
+  workflow_call:
+    inputs:
+      project_path:
+        required: true
+        type: string
+    secrets:
+      NUGET_API_KEY:
+        required: true
+
+jobs:
+  publish-on-github:
+    name: Publish Module on NuGet/GPR
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Setup
+      uses: butr/actions-common-setup@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Pack
+      run: dotnet pack ${{ inputs.project_path }} --configuration Release -o "./packages"
+      shell: pwsh
+
+    - name: Push to NuGet
+      run: dotnet nuget push "./packages/*.nupkg" -k ${{ secrets.NUGET_API_KEY }} -s https://www.nuget.org --skip-duplicate
+      shell: pwsh
+
+    - name: Push to GPR
+      run: |
+           for f in ./packages/*.nupkg
+           do
+             curl -vX PUT -u "vslee:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/BUTR/
+           done

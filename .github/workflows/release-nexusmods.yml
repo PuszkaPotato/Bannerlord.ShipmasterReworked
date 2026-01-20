@@ -1,0 +1,131 @@
+name: Release Module on NexusMods
+
+on:
+  workflow_call:
+    inputs:
+      nexusmods_game_id:
+        required: true
+        type: string
+      nexusmods_mod_id:
+        required: true
+        type: string
+      mod_filename:
+        required: true
+        type: string
+      mod_version:
+        required: false
+        type: string
+        default: ''
+      mod_description:
+        required: false
+        type: string
+        default: ''
+      artifact_name:
+        required: true
+        type: string
+      mod_description_full:
+        required: false
+        type: boolean
+        default: true
+      append_v_to_version:
+        required: false
+        type: boolean
+        default: true
+    secrets:
+      NEXUSMODS_APIKEY:
+        required: true
+      NEXUSMODS_SESSION_COOKIE:
+        required: true
+
+jobs:
+  publish-on-nexusmods:
+    name: Publish Module on NexusMods
+    runs-on: ubuntu-latest
+    environment:
+      name: NexusMods
+      url: https://www.nexusmods.com/${{ inputs.nexusmods_game_id }}/mods/${{ inputs.nexusmods_mod_id }}
+    steps:
+    
+    - name: Setup
+      uses: butr/actions-common-setup@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Download Module artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ${{ inputs.artifact_name }}
+        path: ./artifact
+      continue-on-error: true
+
+    - name: Download Module artifact Pattern
+      uses: actions/download-artifact@v4
+      with:
+        pattern: ${{ inputs.artifact_name }}-*
+        merge-multiple: true
+        path: ./artifact
+      continue-on-error: true
+
+    - name: 7z Module
+      run: 7z a -t7z "${{ inputs.mod_filename }}.7z" ./artifact/* -mx9
+      #shell: pwsh
+      # pwsh casues it to include the root folder
+
+    - name: Install Bannerlord.ChangelogParser
+      if: ${{ inputs.mod_description == '' }}
+      run: dotnet tool install -g Bannerlord.ChangelogParser;
+      shell: pwsh
+
+    - name: Set Version
+      id: set_version
+      run: |
+        if ${{ inputs.mod_version == '' }}
+        then
+          vers="$(bannerlord_changelog_parser latestversion -f "$PWD/changelog.txt")"
+          echo "::set-output name=mod_version::$vers"
+        else
+          echo "::set-output name=mod_version::${{ inputs.mod_version }}"
+        fi
+
+    - name: Set Description
+      id: set_description
+      run: |
+        if ${{ inputs.mod_description == '' }}
+        then
+          desc="$(bannerlord_changelog_parser ${{ inputs.mod_description_full && 'fulldescription' || 'description' }} -f "$PWD/changelog.txt")"
+          desc="${desc//'%'/'%25'}"
+          desc="${desc//$'"'/'%22'}"
+          desc="${desc//$'\n'/'%0A'}"
+          desc="${desc//$'\r'/'%0D'}"
+          echo "::set-output name=mod_description::$desc"
+          c_desc="${desc#'For'*'%0A* '}"
+          c_desc="${c_desc//'%0A* '/'%0A'}"
+          echo "::set-output name=mod_changelog::$c_desc"
+        else
+          desc="${{ inputs.mod_description }}"
+          desc="${desc//'%'/'%25'}"
+          desc="${desc//$'"'/'%22'}"
+          desc="${desc//$'\n'/'%0A'}"
+          desc="${desc//$'\r'/'%0D'}"
+          echo "::set-output name=mod_description::$desc"
+          c_desc="${desc#'For'*'%0A* '}"
+          c_desc="${c_desc//'%0A* '/'%0A'}"
+          echo "::set-output name=mod_changelog::$c_desc"          
+        fi
+
+    - name: Install BUTR.NexusUploader
+      run: dotnet tool install -g BUTR.NexusUploader;
+      shell: pwsh
+
+    - name: Run BUTR.NexusUploader
+      run: |
+        unex upload ${{ inputs.nexusmods_mod_id }} "${{ inputs.mod_filename }}.7z" -v "${{ inputs.append_v_to_version && 'v' || '' }}${{ steps.set_version.outputs.mod_version }}" -f "${{ inputs.mod_filename }}";
+        unex changelog "${{ inputs.append_v_to_version && 'v' || '' }}${{ steps.set_version.outputs.mod_version }}" -c "${{ steps.set_description.outputs.mod_changelog }}" -m "${{ inputs.nexusmods_mod_id }}";
+      shell: pwsh
+      env:
+        UNEX_GAME: ${{ inputs.nexusmods_game_id }}
+        UNEX_FILEDESCRIPTION: ${{ steps.set_description.outputs.mod_description }}
+        UNEX_PREVIOUSFILE: auto
+        UNEX_APIKEY: ${{ secrets.NEXUSMODS_APIKEY }}
+        UNEX_SESSION_COOKIE: ${{ secrets.NEXUSMODS_SESSION_COOKIE }}
+        UNEX_DEBUG: true
