@@ -16,7 +16,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Build Bannerlord module
-          run: |
+        run: 
             mkdir bannerlord
             dotnet build **/*.csproj \
               -c Release \
