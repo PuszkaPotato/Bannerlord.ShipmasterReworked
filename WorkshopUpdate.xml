@@ -6,7 +6,7 @@
 	<UpdateItem>
 		<ModuleFolder Value=""/>
 		<!-- A direct path of your module -->	
-		<ChangeNotes Value="Add update for experience from using siege engines on ships"/>
+		<ChangeNotes Value="Fixed a startup crash on game v1.4.5 caused by TaleWorlds change to a naval method's signature."/>
 		<!-- Insert patch notes -->
 	</UpdateItem>
 </Tasks>
