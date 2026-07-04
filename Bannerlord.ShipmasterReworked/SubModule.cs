@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Bannerlord.ShipmasterReworked.Settings;
 using System.Reflection;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
@@ -31,6 +32,14 @@ namespace Bannerlord.ShipmasterReworked
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
+
+            var settings = MCMConfig.Instance;
+            if (settings != null)
+            {
+                ConfigCache.Refresh(settings);
+            }
+
+            InformationManager.DisplayMessage(new InformationMessage($"[{ModuleInfo.DisplayName}] Version {ModuleInfo.Version} loaded.", Colors.Green));
         }
     }
 
