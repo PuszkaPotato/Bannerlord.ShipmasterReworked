@@ -27,6 +27,11 @@
         public static float BallistaTier3Multiplier { get; private set; }
         public static float BallistaTier4Multiplier { get; private set; }
 
+        // Navigator XP Sharing
+        public static bool ApplyTravelXpToNavigator { get; private set; }
+        public static bool ApplyRammingXpToNavigator { get; private set; }
+        public static bool ApplyBallistaXpToNavigator { get; private set; }
+
         // Debug Settings
         public static bool TravelXpDebug { get; private set; }
         public static bool RammingXpDebug { get; private set; }
@@ -54,6 +59,10 @@
             BallistaTier2Multiplier = settings.BallistaTier2Multiplier;
             BallistaTier3Multiplier = settings.BallistaTier3Multiplier;
             BallistaTier4Multiplier = settings.BallistaTier4Multiplier;
+
+            ApplyTravelXpToNavigator = settings.ApplyTravelXpToNavigator;
+            ApplyRammingXpToNavigator = settings.ApplyRammingXpToNavigator;
+            ApplyBallistaXpToNavigator = settings.ApplyBallistaXpToNavigator;
 
             TravelXpDebug = settings.TravelXpDebug;
             RammingXpDebug = settings.RammingXpDebug;

@@ -7,3 +7,8 @@ Version: 1.3.2
 Game Versions: v1.4.x
 * Fixed a startup crash on game v1.4.5 caused by TaleWorlds change to a naval method's signature.
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.3
+Game Versions: v1.4.x
+* Fixed an issue, where settings are not applied until mod options are saved. Now the default settings are applied immediately (Reported by LessTalking).
+* Added a toggle to apply experience to a Navigator, by default only travelling on seas grants experience to a Navigator.
+---------------------------------------------------------------------------------------------------

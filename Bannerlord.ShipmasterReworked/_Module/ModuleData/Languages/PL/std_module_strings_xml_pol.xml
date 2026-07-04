@@ -46,6 +46,14 @@
 		<string id="shipmaster_reworked_ballista_tier4_multiplier" text="Mnożnik Poziomu 4 Balisty" />
 		<string id="shipmaster_reworked_ballista_tier4_multiplier_hint" text="Mnożnik doświadczenia stosowany po osiągnięciu odległości Poziomu 4 balisty." />
 
+		<!-- Navigator XP Sharing -->
+		<string id="shipmaster_reworked_apply_travel_xp_to_navigator" text="Dziel Doświadczenie z Podróży z Nawigatorem" />
+		<string id="shipmaster_reworked_apply_travel_xp_to_navigator_hint" text="Jeśli włączone, Nawigator drużyny również zdobywa doświadczenie Kapitana z podróży. Domyślnie włączone." />
+		<string id="shipmaster_reworked_apply_ramming_xp_to_navigator" text="Dziel Doświadczenie z Taranowania z Nawigatorem" />
+		<string id="shipmaster_reworked_apply_ramming_xp_to_navigator_hint" text="Jeśli włączone, Nawigator drużyny również zdobywa doświadczenie Kapitana z taranowania. Domyślnie wyłączone." />
+		<string id="shipmaster_reworked_apply_ballista_xp_to_navigator" text="Dziel Doświadczenie z Balisty z Nawigatorem" />
+		<string id="shipmaster_reworked_apply_ballista_xp_to_navigator_hint" text="Jeśli włączone, Nawigator drużyny również zdobywa doświadczenie Kapitana z obrażeń balisty. Domyślnie wyłączone." />
+
 		<!-- Debug Settings -->
 		<string id="shipmaster_reworked_travel_xp_debug" text="Włącz Komunikaty Debugowania Doświadczenia z Podróży" />
 		<string id="shipmaster_reworked_travel_xp_debug_hint" text="Jeśli włączone, komunikaty debugowania będą wyświetlane podczas zdobywania doświadczenia Kapitana z podróży." />

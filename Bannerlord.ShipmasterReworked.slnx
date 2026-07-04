@@ -11,6 +11,7 @@
   <Folder Name="/Solution Items/">
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
+    <File Path="changelog.txt" />
     <File Path="LICENSE.txt" />
     <File Path="markdowntobbcode.ps1" />
     <File Path="README.md" />

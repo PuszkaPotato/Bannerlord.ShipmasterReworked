@@ -8,6 +8,7 @@ A mod for Mount & Blade II: Bannerlord for the DLC War Sails that changes the be
 - Experience gain for Shipmaster skill from sailing now has additional 2x multiplier for travelling in storms.
 - Experience gain for Shipmaster skill from ramming in naval battles, it depends on the ramming quality as well as the ramming damage.
 - Experience gain for Shipmaster skill from using ballistas in naval battles, it depends on the damage dealt to ships as well as agents (crew members) on ships.
+- The party's Navigator can also gain Shipmaster experience. By default this applies only to sailing; sharing ramming and ballista experience with the Navigator are optional toggles (off by default) in MCM.
 
 ## Requirements
 - Mount & Blade II: Bannerlord with War Sails DLC installed.
@@ -106,6 +107,16 @@ That value is then rounded to the nearest integer, and then multiplied by the le
 Ballista distance multiplier is applied only for hits on ships and is using the distance between the firing ship and the hit location, so hitting the front of the ship is technically closer than hitting the back of the ship.
 
 Distance multipliers are configurable but I believe default settings are balanced, this setting is also considered for advanced users, and has its own subcategory in MCM.
+
+## Navigator Experience Sharing
+
+Every party has a Navigator role, and it makes sense for the person navigating to also learn the Shipmaster skill. When enabled, the party's Navigator (or the party leader when nobody is assigned to the role) gains the same amount of Shipmaster experience as the primary source.
+
+- **Sailing**: shares experience with the Navigator by default.
+- **Ramming**: optional, disabled by default.
+- **Ballista**: optional, disabled by default.
+
+All three are configurable in MCM. If the Navigator and the hero earning the experience are the same person, the experience is only granted once.
 
 ## Translations
 

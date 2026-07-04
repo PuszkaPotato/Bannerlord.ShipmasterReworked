@@ -46,6 +46,14 @@
     <string id="shipmaster_reworked_ballista_tier4_multiplier" text="Ballista Tier 4 Multiplier" />
     <string id="shipmaster_reworked_ballista_tier4_multiplier_hint" text="XP multiplier applied when Ballista Tier 4 distance is reached." />
     
+    <!-- Navigator XP Sharing -->
+    <string id="shipmaster_reworked_apply_travel_xp_to_navigator" text="Share Travel XP with Navigator" />
+    <string id="shipmaster_reworked_apply_travel_xp_to_navigator_hint" text="If enabled, the party's Navigator also gains Shipmaster XP from traveling. Enabled by default." />
+    <string id="shipmaster_reworked_apply_ramming_xp_to_navigator" text="Share Ramming XP with Navigator" />
+    <string id="shipmaster_reworked_apply_ramming_xp_to_navigator_hint" text="If enabled, the party's Navigator also gains Shipmaster XP from ramming. Disabled by default." />
+    <string id="shipmaster_reworked_apply_ballista_xp_to_navigator" text="Share Ballista XP with Navigator" />
+    <string id="shipmaster_reworked_apply_ballista_xp_to_navigator_hint" text="If enabled, the party's Navigator also gains Shipmaster XP from ballista damage. Disabled by default." />
+
     <!-- Debug Settings -->
     <string id="shipmaster_reworked_travel_xp_debug" text="Enable Travel XP Debug Messages" />
     <string id="shipmaster_reworked_travel_xp_debug_hint" text="If enabled, debug messages will be displayed when gaining Shipmaster XP from traveling." />

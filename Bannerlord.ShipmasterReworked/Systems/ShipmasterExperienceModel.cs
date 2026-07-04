@@ -38,7 +38,7 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (xp <= 0)
                 return;
 
-            hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+            GiveExperience(hero, party, ConfigCache.ApplyTravelXpToNavigator, xp);
 
             if (ConfigCache.TravelXpDebug && hero.IsHumanPlayerCharacter)
             {
@@ -73,7 +73,9 @@ namespace Bannerlord.ShipmasterReworked.Systems
                 return;
 
             int xp = MBRandom.RoundRandomized(rawXp);
-            hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+
+            MobileParty party = hero.PartyBelongedTo;
+            GiveExperience(hero, party, ConfigCache.ApplyRammingXpToNavigator, xp);
 
             if (ConfigCache.RammingXpDebug && hero.IsHumanPlayerCharacter)
             {
@@ -119,7 +121,8 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (xp <= 0)
                 return;
 
-            hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+            MobileParty party = hero.PartyBelongedTo;
+            GiveExperience(hero, party, ConfigCache.ApplyBallistaXpToNavigator, xp);
 
             if (ConfigCache.BallistaXpDebug && hero.IsHumanPlayerCharacter)
             {
@@ -150,7 +153,7 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (xp <= 0)
                 return;
 
-            hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+            GiveExperience(hero, hero.PartyBelongedTo, ConfigCache.ApplyBallistaXpToNavigator, xp);
 
             if (ConfigCache.BallistaXpDebug && hero.IsHumanPlayerCharacter)
             {
@@ -317,6 +320,22 @@ namespace Bannerlord.ShipmasterReworked.Systems
                 multiplier = ConfigCache.BallistaTier4Multiplier;
 
             return multiplier;
+        }
+
+        private static void GiveExperience(Hero hero, MobileParty party, bool applyToNavigator, int xp)
+        {
+            if (xp <= 0)
+                return;
+
+            if (IsValidHero(hero))
+                hero.AddSkillXp(NavalSkills.Shipmaster, xp);
+
+            if (!applyToNavigator || party == null)
+                return;
+
+            Hero navigator = party.EffectiveNavigator;
+            if (IsValidHero(navigator) && navigator != hero)
+                navigator.AddSkillXp(NavalSkills.Shipmaster, xp);
         }
 
         private static bool IsValidHero(Hero hero)

@@ -6,7 +6,8 @@
 	<UpdateItem>
 		<ModuleFolder Value=""/>
 		<!-- A direct path of your module -->	
-		<ChangeNotes Value="Fixed a startup crash on game v1.4.5 caused by TaleWorlds change to a naval method's signature."/>
+		<ChangeNotes Value="[h3]What's new[/h3][list][*]Fixed: mod settings were not applied until you opened the options menu. Your configured (or default) settings now take effect immediately on game
+  start (Reported by LessTalking).[*]Added: option to share Shipmaster XP with your party's Navigator. Enabled for sea travel by default; ramming and ballista XP sharing are opt-in toggles in the settings.[/list]"/>
 		<!-- Insert patch notes -->
 	</UpdateItem>
 </Tasks>

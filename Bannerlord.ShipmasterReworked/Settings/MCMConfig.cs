@@ -28,9 +28,13 @@ namespace Bannerlord.ShipmasterReworked.Settings
         private float _ballistaTier3Multiplier = 5.0f;
         private float _ballistaTier4Multiplier = 7.0f;
 
-        private bool _travelXpDebug = false;
-        private bool _rammingXpDebug = false;
-        private bool _ballistaXpDebug = false;
+        private bool _applyTravelXpToNavigator = true;
+        private bool _applyRammingXpToNavigator = false;
+        private bool _applyBallistaXpToNavigator = false;
+
+        private bool _travelXpDebug = true;
+        private bool _rammingXpDebug = true;
+        private bool _ballistaXpDebug = true;
 
         public override string Id => ModuleInfo.Id;
         public override string DisplayName => ModuleInfo.DisplayName + " " + ModuleInfo.Version;
@@ -68,6 +72,15 @@ namespace Bannerlord.ShipmasterReworked.Settings
             set => SetAndRefresh(ref _stormTravelXpMultiplier, value);
         }
 
+        [SettingPropertyBool("{=shipmaster_reworked_apply_travel_xp_to_navigator}Share Travel XP with Navigator", Order = 4, RequireRestart = false,
+            HintText = "{=shipmaster_reworked_apply_travel_xp_to_navigator_hint}If enabled, the party's Navigator also gains Shipmaster XP from traveling. Enabled by default.")]
+        [SettingPropertyGroup("{=shipmaster_reworked_group_travel}Travel XP Settings", GroupOrder = 1)]
+        public bool ApplyTravelXpToNavigator
+        {
+            get => _applyTravelXpToNavigator;
+            set => SetAndRefresh(ref _applyTravelXpToNavigator, value);
+        }
+
         // ===============================
         // Ramming XP Settings
         // ===============================
@@ -88,6 +101,15 @@ namespace Bannerlord.ShipmasterReworked.Settings
         {
             get => _rammingXpQualityFactor;
             set => SetAndRefresh(ref _rammingXpQualityFactor, value);
+        }
+
+        [SettingPropertyBool("{=shipmaster_reworked_apply_ramming_xp_to_navigator}Share Ramming XP with Navigator", Order = 3, RequireRestart = false,
+            HintText = "{=shipmaster_reworked_apply_ramming_xp_to_navigator_hint}If enabled, the party's Navigator also gains Shipmaster XP from ramming. Disabled by default.")]
+        [SettingPropertyGroup("{=shipmaster_reworked_group_ramming}Ramming XP Settings", GroupOrder = 2)]
+        public bool ApplyRammingXpToNavigator
+        {
+            get => _applyRammingXpToNavigator;
+            set => SetAndRefresh(ref _applyRammingXpToNavigator, value);
         }
 
         // ===============================
@@ -128,6 +150,15 @@ namespace Bannerlord.ShipmasterReworked.Settings
         {
             get => _ballistaDamageXpMax;
             set => SetAndRefresh(ref _ballistaDamageXpMax, value);
+        }
+
+        [SettingPropertyBool("{=shipmaster_reworked_apply_ballista_xp_to_navigator}Share Ballista XP with Navigator", Order = 5, RequireRestart = false,
+            HintText = "{=shipmaster_reworked_apply_ballista_xp_to_navigator_hint}If enabled, the party's Navigator also gains Shipmaster XP from ballista damage. Disabled by default.")]
+        [SettingPropertyGroup("{=shipmaster_reworked_group_ballista}Ballista XP Settings", GroupOrder = 3)]
+        public bool ApplyBallistaXpToNavigator
+        {
+            get => _applyBallistaXpToNavigator;
+            set => SetAndRefresh(ref _applyBallistaXpToNavigator, value);
         }
 
         [SettingPropertyFloatingInteger("{=shipmaster_reworked_ballista_tier1_distance}Ballista Tier 1 Distance", 10f, 180f, "#0", Order = 1, RequireRestart = false,
