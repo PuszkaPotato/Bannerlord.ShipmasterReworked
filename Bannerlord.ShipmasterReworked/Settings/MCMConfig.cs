@@ -32,9 +32,9 @@ namespace Bannerlord.ShipmasterReworked.Settings
         private bool _applyRammingXpToNavigator = false;
         private bool _applyBallistaXpToNavigator = false;
 
-        private bool _travelXpDebug = true;
-        private bool _rammingXpDebug = true;
-        private bool _ballistaXpDebug = true;
+        private bool _travelXpDebug = false;
+        private bool _rammingXpDebug = false;
+        private bool _ballistaXpDebug = false;
 
         public override string Id => ModuleInfo.Id;
         public override string DisplayName => ModuleInfo.DisplayName + " " + ModuleInfo.Version;
