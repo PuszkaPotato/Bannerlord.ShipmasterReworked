@@ -40,8 +40,8 @@ jobs:
     with:
       nexusmods_game_id: mountandblade2bannerlord
       nexusmods_mod_id: "9570"
+      nexusmods_file_group_id: "2729413"
       mod_filename: Bannerlord.ShipmasterReworked
       artifact_name: bannerlord
     secrets:
       NEXUSMODS_APIKEY: ${{ secrets.NEXUSMODS_APIKEY }}
-      NEXUSMODS_SESSION_COOKIE: ${{ secrets.NEXUSMODS_SESSION_COOKIE }}
