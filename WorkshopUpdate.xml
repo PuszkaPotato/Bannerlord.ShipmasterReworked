@@ -6,8 +6,7 @@
 	<UpdateItem>
 		<ModuleFolder Value=""/>
 		<!-- A direct path of your module -->	
-		<ChangeNotes Value="[h3]What's new[/h3][list][*]Fixed: mod settings were not applied until you opened the options menu. Your configured (or default) settings now take effect immediately on game
-  start (Reported by LessTalking).[*]Added: option to share Shipmaster XP with your party's Navigator. Enabled for sea travel by default; ramming and ballista XP sharing are opt-in toggles in the settings.[/list]"/>
+		<ChangeNotes Value="[h3]What's new[/h3][list][*]Fixed: a crash on older game versions (v1.3.4 and up, since the War Sails launch) caused by TaleWorlds changing a naval method between versions and a Navigator property that older builds do not have. The mod now adapts to both.[*]Fixed: on older game versions, travelling on water gave Shipmaster experience to every hero in the party. It is now correctly limited to the party leader (and the Navigator on newer versions).[*]Improved: Harmony patches are now applied individually, so a future game update that breaks one hook can no longer stop the whole mod from loading.[/list]"/>
 		<!-- Insert patch notes -->
 	</UpdateItem>
 </Tasks>

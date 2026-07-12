@@ -20,7 +20,19 @@ namespace Bannerlord.ShipmasterReworked
             base.OnSubModuleLoad();
 
             var harmony = new Harmony(ModuleInfo.Id);
-            harmony.PatchAll();
+
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            {
+                try
+                {
+                    new PatchClassProcessor(harmony, type).Patch();
+                }
+                catch (System.Exception ex)
+                {
+                    InformationManager.DisplayMessage(new InformationMessage($"[{ModuleInfo.DisplayName}] Skipped patch {type.Name}: {ex.Message}", Colors.Red));
+                }
+            }
+
             InformationManager.DisplayMessage(new InformationMessage($"[{ModuleInfo.DisplayName}] Harmony patches applied.", Colors.Green));
         }
 
