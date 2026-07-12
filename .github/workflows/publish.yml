@@ -29,6 +29,8 @@ jobs:
 
   publish-github:
     needs: build
+    permissions:
+      contents: write
     uses: BUTR/workflows/.github/workflows/release-github.yml@master
     with:
       mod_id: Bannerlord.ShipmasterReworked
