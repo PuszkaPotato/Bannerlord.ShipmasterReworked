@@ -31,6 +31,7 @@ jobs:
     needs: build
     permissions:
       contents: write
+      packages: read
     uses: BUTR/workflows/.github/workflows/release-github.yml@master
     with:
       mod_id: Bannerlord.ShipmasterReworked
