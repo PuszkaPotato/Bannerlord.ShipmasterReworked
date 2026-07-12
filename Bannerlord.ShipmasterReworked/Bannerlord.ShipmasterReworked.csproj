@@ -45,11 +45,12 @@
 	<PackageReference Include="Bannerlord.MCM" Version="5.11.3" PrivateAssets="all" IncludeAssets="compile" />
   </ItemGroup>
 
+  <!-- NavalDLC (War Sails) is not part of the BUTR reference-assemblies meta-package,
+       so reference its published reference assemblies explicitly. The version is pinned
+       to the compile target ($(GameVersion), derived from supported-game-versions.txt),
+       so it stays in sync with the declared minimal game version. -->
   <ItemGroup>
-    <Reference Include="NavalDLC" PrivateAssets="all" IncludeAssets="compile">
-      <HintPath>$(BANNERLORD_GAME_DIR)\Modules\NavalDLC\bin\Win64_Shipping_Client\NavalDLC.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+    <PackageReference Include="Bannerlord.ReferenceAssemblies.NavalDLC" Version="$(GameVersion).*-*" PrivateAssets="all" IncludeAssets="compile" />
   </ItemGroup>
   
 </Project>
