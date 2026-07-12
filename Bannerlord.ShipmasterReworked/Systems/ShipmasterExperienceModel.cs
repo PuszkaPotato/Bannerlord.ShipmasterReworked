@@ -1,5 +1,7 @@
-﻿using Bannerlord.ShipmasterReworked.Settings;
+﻿using System.Reflection;
+using Bannerlord.ShipmasterReworked.Settings;
 using Bannerlord.ShipmasterReworked.Systems.Environment;
+using HarmonyLib;
 using NavalDLC.CharacterDevelopment;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.Party;
@@ -333,9 +335,20 @@ namespace Bannerlord.ShipmasterReworked.Systems
             if (!applyToNavigator || party == null)
                 return;
 
-            Hero navigator = party.EffectiveNavigator;
+            Hero navigator = GetEffectiveNavigator(party);
             if (IsValidHero(navigator) && navigator != hero)
                 navigator.AddSkillXp(NavalSkills.Shipmaster, xp);
+        }
+
+        private static readonly MethodInfo? EffectiveNavigatorGetter =
+            AccessTools.PropertyGetter(typeof(MobileParty), "EffectiveNavigator");
+
+        private static Hero? GetEffectiveNavigator(MobileParty party)
+        {
+            if (EffectiveNavigatorGetter == null)
+                return null;
+
+            return EffectiveNavigatorGetter.Invoke(party, null) as Hero;
         }
 
         private static bool IsValidHero(Hero hero)

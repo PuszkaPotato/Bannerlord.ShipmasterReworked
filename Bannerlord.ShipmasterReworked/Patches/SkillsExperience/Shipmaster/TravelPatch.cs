@@ -9,12 +9,22 @@ namespace Bannerlord.ShipmasterReworked.Patches.SkillsExperience.Shipmaster
     [HarmonyPatch(typeof(NavalSkillLevellingManager), nameof(NavalSkillLevellingManager.OnTravelOnWater))]
     public static class TravelPatch
     {
-        public static bool Prefix(MobileParty party, float speed)
+        public static bool Prefix(object[] __args)
         {
-            Hero hero = party.LeaderHero;
+            Hero? hero = __args[0] switch
+            {
+                Hero h => h,
+                MobileParty party => party.LeaderHero,
+                _ => null
+            };
+
             if (hero == null)
                 return false;
 
+            if (hero.PartyBelongedTo?.LeaderHero != hero)
+                return false;
+
+            float speed = (float)__args[1];
             ShipmasterExperienceModel.OnTravel(hero, speed);
 
             // Skip vanilla XP
