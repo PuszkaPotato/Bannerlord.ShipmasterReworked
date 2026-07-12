@@ -26,7 +26,7 @@ A mod for Mount & Blade II: Bannerlord for the DLC War Sails that changes the be
 4. Enable the mod in the Bannerlord launcher before starting the game.
 
 ## Compatibility
-This mod is compatible with the latest version of Mount & Blade II: Bannerlord and the War Sails DLC. It may not be compatible with other mods that alter the Shipmaster skill or naval combat mechanics.
+This mod is compatible with the War Sails DLC from its launch (game v1.3.4) through the latest version of Mount & Blade II: Bannerlord. It may not be compatible with other mods that alter the Shipmaster skill or naval combat mechanics.
 
 ## Ramming Experience Calculation
 
