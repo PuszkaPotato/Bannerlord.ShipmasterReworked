@@ -1,9 +1,14 @@
-﻿using System.Reflection;
-using Bannerlord.ShipmasterReworked.Settings;
+﻿using Bannerlord.ShipmasterReworked.Settings;
 using Bannerlord.ShipmasterReworked.Systems.Environment;
+
 using HarmonyLib;
+using System.Reflection;
+using System.Linq;
+
 using NavalDLC.CharacterDevelopment;
+
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
@@ -175,12 +180,12 @@ namespace Bannerlord.ShipmasterReworked.Systems
         private static int GetOptimalShipCount(MobileParty party)
         {
             const int BaseMaxShips = 3;
-            int optimalShipCount = BaseMaxShips;
-            if (party.HasPerk(NavalPerks.Shipmaster.ShoreMaster))
-                optimalShipCount++;
-            if (party.HasPerk(NavalPerks.Shipmaster.FleetCommander))
-                optimalShipCount++;
-            return optimalShipCount;
+
+            _shipCountPerks ??= ResolveShipCountPerks();
+
+            int perkCount = _shipCountPerks.Count(perk => HasPerkCompat(party, perk));
+
+            return BaseMaxShips + perkCount;
         }
 
         private static bool IsOptimalShipCount(MobileParty party)
@@ -364,6 +369,87 @@ namespace Bannerlord.ShipmasterReworked.Systems
         private static bool IsValidPositiveFloat(float value)
         {
             return IsValidFloat(value) && value > 0f;
+        }
+
+        // New method signature introduced after War Sails v1.3.0 and Bannerlord v1.5.0, which removed the second boolean parameter.
+        private static readonly MethodInfo? HasPerkNewMethod = AccessTools.Method(
+            typeof(MobileParty),
+            "HasPerk",
+            new[] { typeof(PerkObject) }
+        );
+
+        // Old method signature before War Sails v1.3.0 and Bannerlord v1.5.0, which included a second boolean parameter.
+        private static readonly MethodInfo? HasPerkOldMethod = AccessTools.Method(
+            typeof(MobileParty),
+            "HasPerk",
+            new[] { typeof(PerkObject), typeof(bool) }
+        );
+
+        private static PerkObject[]? _shipCountPerks;
+
+        private static bool HasPerkCompat(MobileParty party, PerkObject perk)
+        {
+            Hero? roleHolder = party.GetEffectiveRoleHolder(perk.PrimaryRole);
+            return roleHolder?.GetPerkValue(perk) == true;
+        }
+
+        private static PerkObject[] ResolveShipCountPerks()
+        {
+            // MasterAndCommander didn't exist in the old perk tree,
+            // so use it to detect the new version.
+            PerkObject? masterAndCommander =
+                GetNavalPerk("Shipmaster", "MasterAndCommander");
+
+            if (masterAndCommander != null)
+            {
+                // New perk tree
+                return new[]
+                {
+            GetNavalPerk("Boatswain", "BlessingsOfTheSea"),
+            GetNavalPerk("Boatswain", "PortAuthority"),
+            masterAndCommander,
+            GetNavalPerk("Shipmaster", "Stormrider")
+        }
+                .Where(perk => perk != null)
+                .Cast<PerkObject>()
+                .ToArray();
+            }
+
+            // Old perk tree
+            return new[]
+            {
+        GetNavalPerk("Shipmaster", "ShoreMaster"),
+        GetNavalPerk("Shipmaster", "FleetCommander")
+    }
+            .Where(perk => perk != null)
+            .Cast<PerkObject>()
+            .ToArray();
+        }
+
+        private static PerkObject? GetNavalPerk(string skill, string perkName)
+        {
+            System.Type? skillType = typeof(NavalPerks).GetNestedType(
+                skill,
+                BindingFlags.Public | BindingFlags.NonPublic
+            );
+
+            if (skillType is null)
+                return null;
+
+            PropertyInfo? property = skillType.GetProperty(
+                perkName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
+
+            if (property?.GetValue(null) is PerkObject propertyPerk)
+                return propertyPerk;
+
+            FieldInfo? field = skillType.GetField(
+                perkName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+            );
+
+            return field?.GetValue(null) as PerkObject;
         }
     }
 }
